@@ -1,0 +1,43 @@
+.pageContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Pretendard", sans-serif;
+}
+.contentContainer {
+  width: 600px;
+  height: auto;
+  position: relative;
+}
+.welcomeMessage {
+  margin-top: 20px;
+  display: block;
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  margin: 40px;
+}
+.welcomeMessage span {
+  font-weight: 700;
+}
+.postsContainer {
+  display: flex;
+  flex-direction: column;
+}
+.buttonRightAlign {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.postCreateBtn {
+  width: 138px;
+  height: 39px;
+  background-color: #aca0eb;
+  color: #ffffff;
+  border: 0;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 700;
+}

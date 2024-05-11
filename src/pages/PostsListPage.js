@@ -1,81 +1,78 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "../style/PostsListPage.module.css";
 import Navbar from "../components/Navbar";
 import PostCard from "../components/PostCard";
-import "../style/PostListPage.css";
-import df_profile_img from "../assets/images/profile_img.webp";
+const dummyPosts = [
+  {
+    id: 1,
+    title: "첫 번째 게시글",
+    likes: 150,
+    commentsCount: 10,
+    views: 200,
+    date: new Date().toISOString(),
+    author: {
+      nickname: "홍길동",
+    },
+  },
+  {
+    id: 2,
+    title: "두 번째 게시글",
+    likes: 250,
+    commentsCount: 40,
+    views: 500,
+    date: new Date().toISOString(),
+    author: {
+      nickname: "김철수",
+    },
+  },
+  {
+    id: 3,
+    title: "세 번째 게시글",
+    likes: 90,
+    commentsCount: 5,
+    views: 120,
+    date: new Date().toISOString(),
+    author: {
+      nickname: "이영희",
+    },
+  },
+];
+
 function PostsListPage() {
-  const [profileImage, setProfileImage] = useState("");
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      title: "첫 번째 게시글",
-      likes: 150,
-      commentsCount: 3,
-      views: 200,
-      date: new Date().toISOString(),
-      author: {
-        nickname: "홍길동",
-        profileImage_path: df_profile_img,
-      },
-    },
-    {
-      id: 2,
-      title: "두 번째 게시글",
-      likes: 250,
-      commentsCount: 5,
-      views: 400,
-      date: new Date().toISOString(),
-      author: {
-        nickname: "김철수",
-        profileImage_path: df_profile_img,
-      },
-    },
-  ]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setProfileImage(df_profile_img);
-  }, []);
-
-  const formatCount = (num) => {
-    if (num >= 1000) return `${(num / 1000).toFixed(0)}k`;
-    return num;
+  // 이벤트 핸들러 함수
+  const handleCreatePostClick = () => {
+    navigate("/create-post"); // '/create-post' 경로로 이동
   };
 
   return (
     <>
-      <Navbar
-        userProfileImage={profileImage}
-        showBackButton={false}
-        showProfile={true}
-      />
-      <div className="page-container">
-        <div className="content-container">
-          <div className="welcome-message">
+      <Navbar showBackButton={false} ShowProfileImage={true}></Navbar>
+      <div className={styles.pageContainer}>
+        <div className={styles.contentContainer}>
+          <div className={styles.welcomeMessage}>
             <p>
               안녕하세요,
               <br />
               아무 말 대잔치 <span>게시판</span>입니다.
             </p>
           </div>
-          <div className="posts-container">
-            <div className="button-right-align">
+          <div className={styles.postsContainer}>
+            <div className={styles.buttonRightAlign}>
               <button
-                className="post-create-btn"
-                onClick={() => navigate("/posts/new")}
+                className={styles.postCreateBtn}
+                onClick={handleCreatePostClick}
               >
                 게시글 작성
               </button>
             </div>
-            {posts.map((post) => (
-              <PostCard
-                key={post.id}
-                post={post}
-                navigate={navigate}
-                formatCount={formatCount}
-              />
-            ))}
+            <div className={styles.postsContainer}>
+              {dummyPosts.map((post) => (
+                <PostCard key={post.id} post={post} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
