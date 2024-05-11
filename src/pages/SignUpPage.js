@@ -1,63 +1,28 @@
-import React, { useState, useRef } from "react";
-import Navbar from "../components/Navbar";
-import SignUpForm from "../forms/SignUpForm";
-import "../style/SignUpPage.css";
-import addIcon from "../assets/images/add-icon.png";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import styles from "../style/SignUpPage.module.css";
+import SignUpForm from "../forms/SignUpForm";
+import ProfileInput from "../components/ProfileInput";
 
 function SignUpPage() {
-  const [profileImage, setProfileImage] = useState({
-    src: addIcon,
-    style: { width: "24px", height: "24px" },
-  });
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [helperTexts, setHelperTexts] = useState({
-    email: "*helper text",
-    password: "*helper text",
-    confirmPassword: "*helper text",
-    nickname: "*helper text",
-    profileImage: "*helper text",
-  });
-  const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleSignUp = async () => {
-    //회원가입 서버 통신 로직 추가 예정
-  };
-  const goToLogin = () => {
+  function goLogin() {
     navigate("/login");
-  };
+  }
 
   return (
     <>
-      <Navbar showBackButton={true} showProfile={false} />
-      <div className="page-container">
-        <div className="signup-container">
-          <p className="page-header">회원가입</p>
-          <SignUpForm
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            confirmPassword={confirmPassword}
-            setConfirmPassword={setConfirmPassword}
-            nickname={nickname}
-            setNickname={setNickname}
-            profileImage={profileImage}
-            setProfileImage={setProfileImage}
-            helperTexts={helperTexts}
-            setHelperTexts={setHelperTexts}
-            handleSignUp={handleSignUp}
-            fileInputRef={fileInputRef}
-          />
-          <div class="a-container">
-            <p className="go-to-login" onClick={goToLogin}>
-              로그인하러 가기
-            </p>
-          </div>
+      <Navbar showBackButton={true} ShowProfileImage={false}></Navbar>
+      <div className={styles.pageContainer}>
+        <div className={styles.signUpContainer}>
+          <p className={styles.pageHeader}>회원가입</p>
+          <ProfileInput></ProfileInput>
+          <SignUpForm></SignUpForm>
+          <p className={styles.goLogin} onClick={goLogin}>
+            로그인 하러가기
+          </p>
         </div>
       </div>
     </>
