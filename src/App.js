@@ -13,34 +13,6 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">게시글 목록 조회 페이지</Link>
-            </li>
-            <li>
-              <Link to="/posts/1">게시글 상세 조회 페이지</Link>
-            </li>
-            <li>
-              <Link to="/edit-post/1">게시글 수정 페이지</Link>
-            </li>
-            <li>
-              <Link to="/login">로그인 페이지</Link>
-            </li>
-            <li>
-              <Link to="/signup">회원가입 페이지</Link>
-            </li>
-            <li>
-              <Link to="/create-post">게시글 생성 페이지</Link>
-            </li>
-            <li>
-              <Link to="/edit-profile">회원정보수정 페이지</Link>
-            </li>
-            <li>
-              <Link to="/change-password">비밀번호 수정 페이지</Link>
-            </li>
-          </ul>
-        </nav>
         <Routes>
           <Route path="/" element={<PostsListPage />} />
           <Route path="/login" element={<LoginPage />} />
