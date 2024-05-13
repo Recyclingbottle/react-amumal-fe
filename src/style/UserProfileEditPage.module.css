@@ -1,0 +1,86 @@
+.pageContainer {
+  box-sizing: border-box;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Pretendard", sans-serif;
+}
+.pageHeader {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+}
+.formGroupLabel,
+.formGroupInput {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.profileEditContainer {
+  width: 355px;
+  height: 170px;
+  font-weight: 700;
+}
+.formGroupLabel {
+  margin-top: 20px;
+}
+.formGroupInput {
+  width: 355px;
+  height: 23px;
+  border-radius: 5px;
+  font-weight: 400;
+  border: 1px solid black;
+  padding: 5px;
+  font-size: 14px;
+}
+.EditButton {
+  display: block;
+  font-family: "Pretendard", sans-serif;
+  border: 0;
+  width: 355px;
+  height: 33px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #aca0eb;
+}
+
+.goToLogin {
+  margin-top: 15px;
+  color: black;
+  font-weight: 400;
+  text-align: center;
+}
+.btnContainer {
+  width: 367px;
+  display: block;
+  align-items: center;
+  justify-content: center;
+}
+
+.backBtn {
+  width: 130px;
+  height: 35px;
+  color: #ffffff;
+  background-color: #aca0eb;
+  border-radius: 24px;
+  border: none;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21.6px;
+  font-family: "Pretendard", sans-serif;
+}
+
+.helperText {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.backBtnBox {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

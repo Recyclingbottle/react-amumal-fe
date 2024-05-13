@@ -1,0 +1,44 @@
+.postComments {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 592px;
+  height: 132px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 0.1px solid #d6d6d6;
+}
+.commentTextarea {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  resize: none;
+  width: 100%;
+  padding: 20px;
+  padding-bottom: 0px;
+  background-color: #ffffff;
+  border-radius: 10px 10px 0 0;
+  border-bottom: 1px solid #d6d6d6;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  line-height: 21.21px;
+}
+.commentsRegisterButtonContainer {
+  margin-left: auto;
+  margin-top: 10px;
+}
+.commentsRegisterButton {
+  background-color: #aca0eb;
+  color: #ffffff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  width: 138px;
+  height: 39px;
+  line-height: 25.04px;
+  border-radius: 26px;
+  border: 0;
+  margin-right: 5px;
+}

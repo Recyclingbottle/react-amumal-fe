@@ -9,7 +9,7 @@ function ProfileInput({ image }) {
       if (fileInputRef.current) {
         fileInputRef.current.click();
       } else {
-        console.error("fileInputRef is not attached to any element.");
+        console.error("에러남");
       }
     };
 

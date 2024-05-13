@@ -32,9 +32,9 @@
 }
 
 .formTextarea {
-  outline: none; /* 포커스 아웃라인 제거 */
-  background-color: transparent; /* 배경색 투명으로 설정 */
-  resize: none; /* 크기 조절 기능 비활성화 */
+  outline: none;
+  background-color: transparent;
+  resize: none;
   font-family: "Pretendard";
 }
 .formInput:focus,

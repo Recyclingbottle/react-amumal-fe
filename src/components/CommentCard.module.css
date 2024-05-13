@@ -10,45 +10,45 @@
 
 .commentContainer {
   display: flex;
-  align-items: flex-start; /* 프로필 이미지를 상단에 정렬합니다 */
-  padding: 20px; /* 적절한 패딩을 제공합니다 */
-  border-radius: 10px; /* 컨테이너 모서리를 둥글게 합니다 */
-  margin-bottom: 10px; /* 여백을 추가합니다 */
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .commentProfilePicture {
   width: 36px;
   height: 36px;
   border-radius: 100%;
-  margin-right: 10px; /* 이미지와 내용 사이의 간격을 설정합니다 */
+  margin-right: 10px;
 }
 
 .commentContent {
-  width: 100%; /* 내용이 컨테이너를 꽉 채우도록 설정합니다 */
+  width: 100%;
 }
 
 .commentTopRow {
-  display: flex; /* 작성자 이름과 날짜를 양 끝에 정렬합니다 */
-  width: 100%; /* 너비를 100%로 설정하여 공간을 꽉 채웁니다 */
-  margin-bottom: 10px; /* 내용과 버튼 사이의 간격을 설정합니다 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .commentAuthorName {
-  font-weight: 700; /* 글씨를 굵게 합니다 */
+  font-weight: 700;
   margin-left: 10px;
 }
 .commentDate {
-  font-weight: 400; /* 글씨를 굵게 합니다 */
+  font-weight: 400;
   margin-left: 10px;
 }
 .commentTextContainer {
-  margin-bottom: 10px; /* 텍스트와 버튼 사이의 여백을 설정합니다 */
+  margin-bottom: 10px;
 }
 
 .commentText {
-  background-color: #ffffff; /* 텍스트 배경색을 흰색으로 설정합니다 */
-  padding: 10px; /* 텍스트 주위에 패딩을 추가합니다 */
-  border-radius: 10px; /* 텍스트 모서리를 둥글게 합니다 */
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .commentBtnContainer {

@@ -4,7 +4,6 @@ import df_profile_img from "../assets/images/profile_img.webp";
 import Modal from "./Modal";
 
 function CommentCard({ comment }) {
-  // Props로 받은 comment 객체 내부의 정보를 사용하도록 설정
   const [isModalOpen, setModalOpen] = useState(false);
   const handleDelete = () => {
     setModalOpen(true);

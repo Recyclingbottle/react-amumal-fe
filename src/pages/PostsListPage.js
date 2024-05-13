@@ -42,9 +42,8 @@ const dummyPosts = [
 function PostsListPage() {
   const navigate = useNavigate();
 
-  // 이벤트 핸들러 함수
   const handleCreatePostClick = () => {
-    navigate("/create-post"); // '/create-post' 경로로 이동
+    navigate("/create-post");
   };
 
   return (

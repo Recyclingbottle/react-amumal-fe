@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../style/PostCreatePage.module.css"; // CSS 모듈 임포트
+import styles from "../style/PostCreatePage.module.css";
 
 const PostForm = ({
   initialTitle = "",
@@ -16,7 +16,6 @@ const PostForm = ({
     setContent(initialContent);
   }, [initialTitle, initialContent]);
 
-  // 폼 제출 핸들러
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(title, content, image);
@@ -25,7 +24,7 @@ const PostForm = ({
   // 파일 입력 핸들러
   const handleFileChange = (event) => {
     setImage(event.target.files[0]);
-    onFileChange(event.target.files[0]); //외부로 이미지 데이터를 전달
+    onFileChange(event.target.files[0]); //이미지 전달
   };
 
   return (

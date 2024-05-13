@@ -9,7 +9,9 @@ function Navbar({ showBackButton, ShowProfileImage }) {
   const [menuVisible, setMenuVisible] = useState(false);
   const navigate = useNavigate();
   const menuRef = useRef(null);
-
+  const handleBack = () => {
+    navigate(-1);
+  };
   function toggleMenu() {
     setMenuVisible((prev) => !prev);
   }
@@ -17,7 +19,12 @@ function Navbar({ showBackButton, ShowProfileImage }) {
   return (
     <div className={styles.navbar}>
       {showBackButton && (
-        <img className={styles.beforeImage} src={before_img} alt="back-img" />
+        <img
+          className={styles.beforeImage}
+          onClick={handleBack}
+          src={before_img}
+          alt="back-img"
+        />
       )}
       <p className={styles.logoText}>아무 말 대잔치</p>
       {ShowProfileImage && (
