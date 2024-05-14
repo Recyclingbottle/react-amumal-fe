@@ -6,6 +6,7 @@ function ProfileInput({ image, onImageChange }) {
   const [profileImage, setProfileImage] = useState(image);
   const [helperText, setHelperText] = useState("");
   const fileInputRef = useRef();
+
   useEffect(() => {
     if (image) {
       setHelperText("");
@@ -43,7 +44,17 @@ function ProfileInput({ image, onImageChange }) {
         onImageChange(reader.result);
       };
       reader.readAsDataURL(file);
+    } else {
+      // 파일이 선택되지 않으면 이미지 제거
+      setProfileImage(null);
+      setHelperText("*프로필 사진을 추가해주세요.");
+      onImageChange(null);
     }
+  };
+
+  // 파일 선택 취소 시 input의 value를 초기화
+  const handleInputClick = (event) => {
+    event.target.value = null;
   };
 
   return (
@@ -66,6 +77,7 @@ function ProfileInput({ image, onImageChange }) {
             ref={fileInputRef}
             style={{ display: "none" }}
             onChange={handleFileChange}
+            onClick={handleInputClick}
           />
         </div>
       </div>
