@@ -42,43 +42,14 @@ function UserProfileEditPage() {
       setHelperText("*닉네임은 최대 10자까지 작성 가능합니다.");
       return false;
     }
-    // 중복된 닉네임 검사 (서버 통신은 주석으로 처리)
-    // fetch('/api/check-nickname', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({ nickname })
-    // }).then(response => response.json())
-    //   .then(data => {
-    //     if (data.isDuplicate) {
-    //       setHelperText("*중복된 닉네임 입니다.");
-    //       return false;
-    //     } else {
-    //       setHelperText("");
-    //       return true;
-    //     }
-    //   });
-
+    //여기에서 서버와 닉중복확인하면됨
     setHelperText("");
     return true;
   };
 
   const handleSubmit = () => {
     if (validateNickname()) {
-      // 서버 통신하여 회원 정보 수정 (주석 처리)
-      // fetch('/api/update-profile', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({ nickname })
-      // }).then(response => response.json())
-      //   .then(data => {
-      //     if (data.success) {
-      //       showToast("수정 완료");
-      //     }
-      //   });
+      //여기에서 수정 메소드 쓰면됨
 
       showToast("수정 완료");
     }
