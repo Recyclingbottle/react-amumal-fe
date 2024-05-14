@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import PostForm from "../forms/PostForm";
 import styles from "../style/PostCreatePage.module.css";
 
 function PostEditPage() {
-  const { postId } = useParams();
+  //const { postId } = useParams();
+  const location = useLocation();
   const [post, setPost] = useState({ title: "", content: "" });
 
   useEffect(() => {
-    //  API 호출해야함
-    // 아래는 예시 데이터임
-    setPost({ title: "기존 게시글 제목", content: "기존 게시글 내용" });
-  }, [postId]);
+    if (location.state && location.state.post) {
+      setPost(location.state.post);
+    }
+  }, [location.state]);
 
-  // 폼 제출 핸들러, API 업데이트 로직을 여기에 구현
   const handleSubmit = (title, content, image) => {
     console.log("수정된 데이터:", { title, content, image });
+    // 서버와 통신 로직 추가해야함
   };
 
   return (

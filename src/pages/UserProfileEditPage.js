@@ -4,17 +4,21 @@ import Navbar from "../components/Navbar";
 import ProfileInput from "../components/ProfileInput";
 import styles from "../style/UserProfileEditPage.module.css";
 import Modal from "../components/Modal";
+import df_profile_img from "../assets/images/profile_img.webp";
 
 function UserProfileEditPage() {
   const [nickname, setNickname] = useState("jun.park (박원준)");
-  const [email, setEmail] = useState("hoholeo382@gmail.com");
+  const [email] = useState("hoholeo382@gmail.com");
   const [isModalOpen, setModalOpen] = useState(false);
+  const [helperText, setHelperText] = useState("*helper text");
+  const [toastMessage, setToastMessage] = useState("");
 
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
   const handleNicknameChange = (e) => {
     setNickname(e.target.value);
   };
+
   const handleDelete = () => {
     setModalOpen(true);
   };
@@ -26,7 +30,65 @@ function UserProfileEditPage() {
   const handleConfirm = () => {
     console.log("회원탈퇴 확인 누름");
     setModalOpen(false);
-    navigator("/login");
+    navigate("/login");
+  };
+
+  const validateNickname = () => {
+    if (!nickname) {
+      setHelperText("*닉네임을 입력해주세요.");
+      return false;
+    }
+    if (nickname.length > 10) {
+      setHelperText("*닉네임은 최대 10자까지 작성 가능합니다.");
+      return false;
+    }
+    // 중복된 닉네임 검사 (서버 통신은 주석으로 처리)
+    // fetch('/api/check-nickname', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({ nickname })
+    // }).then(response => response.json())
+    //   .then(data => {
+    //     if (data.isDuplicate) {
+    //       setHelperText("*중복된 닉네임 입니다.");
+    //       return false;
+    //     } else {
+    //       setHelperText("");
+    //       return true;
+    //     }
+    //   });
+
+    setHelperText("");
+    return true;
+  };
+
+  const handleSubmit = () => {
+    if (validateNickname()) {
+      // 서버 통신하여 회원 정보 수정 (주석 처리)
+      // fetch('/api/update-profile', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({ nickname })
+      // }).then(response => response.json())
+      //   .then(data => {
+      //     if (data.success) {
+      //       showToast("수정 완료");
+      //     }
+      //   });
+
+      showToast("수정 완료");
+    }
+  };
+
+  const showToast = (message) => {
+    setToastMessage(message);
+    setTimeout(() => {
+      setToastMessage("");
+    }, 3000);
   };
 
   return (
@@ -35,7 +97,8 @@ function UserProfileEditPage() {
       <div className={styles.pageContainer}>
         <div className={styles.profileEditContainer}>
           <p className={styles.pageHeader}>회원 정보 수정</p>
-          <ProfileInput />
+          {/* 나중에 진짜 사용자의 이미지로 해야함 */}
+          <ProfileInput image={df_profile_img} />
           <form>
             <div className={styles.formGroup}>
               <label className={styles.formGroupLabel} htmlFor="email">
@@ -57,13 +120,14 @@ function UserProfileEditPage() {
                 required
               />
             </div>
-            <p className={styles.helperText}>*helper text</p>
+            <p className={styles.helperText}>{helperText}</p>
           </form>
           <div className={styles.btnContainer}>
             <button
               className={styles.EditButton}
               type="button"
               style={{ marginTop: 5 }}
+              onClick={handleSubmit}
             >
               수정하기
             </button>
@@ -81,10 +145,11 @@ function UserProfileEditPage() {
             <input type="checkbox" id="modalToggle" hidden />
           </div>
           <div className={styles.backBtnBox}>
-            <button className={styles.backBtn} onClick={() => navigator(-1)}>
+            <button className={styles.backBtn} onClick={() => navigate("/")}>
               수정완료
             </button>
           </div>
+          {toastMessage && <div className={styles.toast}>{toastMessage}</div>}
         </div>
       </div>
     </>

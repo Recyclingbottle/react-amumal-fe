@@ -40,4 +40,9 @@
   border-radius: 15px;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.postCreateBtn:hover {
+  background-color: #7f6aee;
 }

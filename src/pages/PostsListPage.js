@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../style/PostsListPage.module.css";
 import Navbar from "../components/Navbar";
 import PostCard from "../components/PostCard";
-const dummyPosts = [
+const initialPosts = [
   {
     id: 1,
     title: "첫 번째 게시글",
-    likes: 150,
-    commentsCount: 10,
-    views: 200,
+    likes: 1150,
+    commentsCount: 1120,
+    views: 23200,
     date: new Date().toISOString(),
     author: {
       nickname: "홍길동",
@@ -18,9 +18,9 @@ const dummyPosts = [
   {
     id: 2,
     title: "두 번째 게시글",
-    likes: 250,
-    commentsCount: 40,
-    views: 500,
+    likes: 25110,
+    commentsCount: 4110,
+    views: 51100,
     date: new Date().toISOString(),
     author: {
       nickname: "김철수",
@@ -38,14 +38,50 @@ const dummyPosts = [
     },
   },
 ];
-
 function PostsListPage() {
   const navigate = useNavigate();
-
+  const [posts, setPosts] = useState(initialPosts);
+  const [hasMore, setHasMore] = useState(true); // 게시글이 더 있는지 여부
   const handleCreatePostClick = () => {
     navigate("/create-post");
   };
+  const loadMorePosts = useCallback(() => {
+    // 지금은 서버 없이 하니 랜덤 레츠고
+    const newPosts = [
+      {
+        id: posts.length + 1,
+        title: `추가된 게시글 ${posts.length + 1}`,
+        likes: Math.floor(Math.random() * 100),
+        commentsCount: Math.floor(Math.random() * 50),
+        views: Math.floor(Math.random() * 200),
+        date: new Date().toISOString(),
+        author: {
+          nickname: `사용자 ${posts.length + 1}`,
+        },
+      },
+    ];
 
+    setPosts((prevPosts) => [...prevPosts, ...newPosts]);
+
+    if (posts.length >= 20) {
+      // 게시글이 20개면 너무 많다 그죠?
+      setHasMore(false);
+    }
+  }, [posts]);
+  useEffect(() => {
+    //스크롤 인피니트
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+        hasMore
+      ) {
+        loadMorePosts();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [loadMorePosts, hasMore]);
   return (
     <>
       <Navbar showBackButton={false} ShowProfileImage={true}></Navbar>
@@ -68,7 +104,7 @@ function PostsListPage() {
               </button>
             </div>
             <div className={styles.postsContainer}>
-              {dummyPosts.map((post) => (
+              {posts.map((post) => (
                 <PostCard key={post.id} post={post} />
               ))}
             </div>

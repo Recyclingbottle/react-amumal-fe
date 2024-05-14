@@ -3,8 +3,9 @@ import styles from "./CommentCard.module.css";
 import df_profile_img from "../assets/images/profile_img.webp";
 import Modal from "./Modal";
 
-function CommentCard({ comment }) {
+function CommentCard({ comment, onEdit }) {
   const [isModalOpen, setModalOpen] = useState(false);
+
   const handleDelete = () => {
     setModalOpen(true);
   };
@@ -17,6 +18,7 @@ function CommentCard({ comment }) {
     console.log("댓글 삭제 확인 누름");
     setModalOpen(false);
   };
+
   return (
     <>
       <div className={styles.commentContainer}>
@@ -37,6 +39,7 @@ function CommentCard({ comment }) {
               <button
                 className={styles.editCommentBtn}
                 data-comment-id={comment.id}
+                onClick={onEdit}
               >
                 수정
               </button>

@@ -1,24 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./CommentInputForm.module.css";
 
-function CommentInputForm() {
-  // 현재 댓글 작성 모드 상태 관리 true는 등록, false는 수정
+function CommentInputForm({ editingComment }) {
   const [isRegistering, setIsRegistering] = useState(true);
+  const [commentText, setCommentText] = useState("");
 
-  // 댓글 등록 혹은 수정 처리
+  useEffect(() => {
+    if (editingComment) {
+      setIsRegistering(false);
+      setCommentText(editingComment.content);
+    } else {
+      setIsRegistering(true);
+      setCommentText("");
+    }
+  }, [editingComment]);
+
   const handleCommentSubmit = () => {
     if (isRegistering) {
       console.log("댓글 등록");
     } else {
       console.log("댓글 수정 중");
     }
-    // 댓글 작성 후에는 버튼을 "댓글 등록" 상태로 돌려놓기
     setIsRegistering(true);
-  };
-
-  // 수정 모드로 전환 함수
-  const handleEditClick = () => {
-    setIsRegistering(false);
+    setCommentText("");
   };
 
   return (
@@ -27,6 +31,8 @@ function CommentInputForm() {
         <textarea
           placeholder="댓글을 남겨주세요!"
           className={styles.commentTextarea}
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
         ></textarea>
         <div className={styles.commentsRegisterButtonContainer}>
           <button

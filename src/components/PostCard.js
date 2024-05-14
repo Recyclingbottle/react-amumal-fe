@@ -2,11 +2,27 @@ import React from "react";
 import styles from "./PostCard.module.css";
 import df_profile_img from "../assets/images/profile_img.webp";
 import { useNavigate } from "react-router-dom";
+
 function formatCount(count) {
-  if (count >= 1000) {
+  if (count >= 100000) {
     return `${(count / 1000).toFixed(0)}k`;
+  } else if (count >= 10000) {
+    return `${(count / 1000).toFixed(0)}k`;
+  } else if (count >= 1000) {
+    return `${(count / 1000).toFixed(1)}k`;
   }
   return count.toString();
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+  const hh = String(date.getHours()).padStart(2, "0");
+  const min = String(date.getMinutes()).padStart(2, "0");
+  const ss = String(date.getSeconds()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
 }
 
 function PostCard({ post }) {
@@ -25,9 +41,7 @@ function PostCard({ post }) {
           댓글수 {formatCount(post.commentsCount)}
         </span>
         <span className={styles.views}>조회수 {formatCount(post.views)}</span>
-        <time className={styles.postDate}>
-          {new Date(post.date).toLocaleString()}
-        </time>
+        <time className={styles.postDate}>{formatDate(post.date)}</time>
       </div>
       <div className={styles.authorInfo}>
         <img

@@ -1,11 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import PostForm from "../forms/PostForm";
 import styles from "../style/PostCreatePage.module.css";
 
 const PostCreatePage = () => {
+  const navigate = useNavigate();
   const handleSubmit = (title, content, image) => {
     console.log({ title, content, image });
+    navigate("/");
+    // 대충 여기에 서버와 통신하는 거 넣으면 됨
   };
 
   return (
