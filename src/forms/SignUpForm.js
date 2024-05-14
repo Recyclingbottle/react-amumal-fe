@@ -93,34 +93,16 @@ function SignUpForm({ profileImage }) {
   }, [email, password, confirmPassword, nickname, profileImage]);
 
   const handleEmailBlur = () => {
-    // 서버와 통신을 넣으면 안되기에 주석으로 서버 통신 로직 자리를 지정합니다.
-    // 예:
-    // fetch('/api/check-email', { method: 'POST', body: JSON.stringify({ email }) })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     if (data.isDuplicate) {
-    //       setEmailHelperText("*중복된 이메일 입니다.");
-    //     }
-    //   });
-
-    // 서버 통신 없이 중복 검사 시뮬레이션
+    //중복 이메일 체크 서버에 보내는 곳
+    //지금은 그냥 하나만
     if (email === "duplicate@example.com") {
       setEmailHelperText("*중복된 이메일 입니다.");
     }
   };
 
   const handleNicknameBlur = () => {
-    // 서버와 통신을 넣으면 안되기에 주석으로 서버 통신 로직 자리를 지정합니다.
-    // 예:
-    // fetch('/api/check-nickname', { method: 'POST', body: JSON.stringify({ nickname }) })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     if (data.isDuplicate) {
-    //       setNicknameHelperText("*중복된 닉네임 입니다.");
-    //     }
-    //   });
-
-    // 서버 통신 없이 중복 검사 시뮬레이션
+    //중복 닉네임 체크 서버에 보내는 곳
+    //지금은 그냥 하나만
     if (nickname === "duplicateNickname") {
       setNicknameHelperText("*중복된 닉네임 입니다.");
     }
@@ -129,13 +111,7 @@ function SignUpForm({ profileImage }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isFormValid) {
-      // 회원가입 로직 추가
-      // fetch('/api/signup', { method: 'POST', body: JSON.stringify({ email, password, nickname }) })
-      //   .then(response => response.json())
-      //   .then(data => {
-      //     // 회원가입 성공 시 로그인 페이지로 이동
-      //     navigate("/login");
-      //   });
+      //여기에서 서버에 회원가입 요청함
       navigate("/login");
     }
   };
