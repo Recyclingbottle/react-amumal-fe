@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
 import before_img from "../../assets/images/navigate-before.png";
-import df_profile_img from "../../assets/images/profile_img.webp";
+import { useAuthState } from "../../context/AuthContext";
+import { API_BASE_URL } from "../../utils/config";
 
 function Navbar({ showBackButton, ShowProfileImage }) {
+  const { user } = useAuthState();
+
   const [menuVisible, setMenuVisible] = useState(false);
   const navigate = useNavigate();
   const menuRef = useRef(null);
@@ -27,11 +30,11 @@ function Navbar({ showBackButton, ShowProfileImage }) {
         />
       )}
       <p className={styles.logoText}>아무 말 대잔치</p>
-      {ShowProfileImage && (
+      {ShowProfileImage && user && (
         <div ref={menuRef} onClick={toggleMenu}>
           <img
             className={styles.profileImage}
-            src={df_profile_img}
+            src={`${API_BASE_URL}/images/profile/${user.profile_image}`}
             alt="profile-img"
           />
         </div>

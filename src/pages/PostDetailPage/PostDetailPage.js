@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../components/common/Navbar";
 import styles from "./PostDetailPage.module.css";
@@ -6,54 +6,8 @@ import df_profile_img from "../../assets/images/profile_img.webp";
 import CommentInputForm from "../../forms/CommentInputForm";
 import CommentCard from "../../components/posts/CommentCard";
 import Modal from "../../components/common/Modal";
-
-const dummyPost = {
-  id: 1,
-  title: "제목 1",
-  author: { nickname: "더미 작성자 1", profileImagePath: df_profile_img },
-  date: "2021-01-01 00:00:00",
-  content: `
-    무엇을 얘기할까요? 아무말이라면, 삶은 항상 놀라운 모험이라고 생각합니다.
-    우리는 매일 새로운 경험을 하고 배우며 성장합니다. 때로는 어려움과 도전이 있지만,
-    그것들이 우리를 더 강하고 지혜롭게 만듭니다. 또한 우리는 주변의 사람들과 연결되며
-    사랑과 지지를 받습니다. 그래서 우리의 삶은 소중하고 의미가 있습니다.
-    <br />
-    자연도 아름다운 이야기입니다. 우리 주변의 자연은 끝없는 아름다움과 신비로움을
-    담고 있습니다. 산, 바다, 숲, 하늘 등 모든 것이 우리를 놀라게 만들고 감동시킵니다.
-    자연은 우리의 생명과 안정을 지키며 우리에게 힘을 주는 곳입니다.
-    <br />
-    마지막으로, 지식을 향한 탐구는 항상 흥미로운 여정입니다. 우리는 끝없는 지식의
-    바다에서 배우고 발견할 수 있으며, 이것이 우리를 더 깊이 이해하고 세상을 더 넓게
-    보게 해줍니다.
-    <br />
-    그런 의미에서, 삶은 놀라움과 경이로움으로 가득 차 있습니다. 새로운 경험을 즐기고
-    항상 앞으로 나아가는 것이 중요하다고 생각합니다.
-  `,
-  views: 123,
-  commentsCount: 3,
-  imagePath: "",
-};
-
-const dummyComments = [
-  {
-    id: 1,
-    author: { nickname: "더미 작성자 1" },
-    date: "2021-01-01 00:00:00",
-    content: "댓글 내용",
-  },
-  {
-    id: 2,
-    author: { nickname: "더미 작성자 1" },
-    date: "2021-01-01 00:00:00",
-    content: "댓글 내용",
-  },
-  {
-    id: 3,
-    author: { nickname: "더미 작성자 1" },
-    date: "2021-01-01 00:00:00",
-    content: "댓글 내용",
-  },
-];
+import { getPostById } from "../../utils/postApi";
+import { API_BASE_URL } from "../../utils/config";
 
 const formatCount = (count) => {
   if (count >= 100000) {
@@ -69,11 +23,25 @@ const formatCount = (count) => {
 const PostDetailPage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
+  const [post, setPost] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [editingComment, setEditingComment] = useState(null);
 
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const fetchedPost = await getPostById(postId);
+        setPost(fetchedPost);
+      } catch (error) {
+        console.error("게시글을 가져오는 중 오류 발생:", error);
+      }
+    };
+
+    fetchPost();
+  }, [postId]);
+
   const gotoEditPost = () => {
-    navigate(`/edit-post/${postId}`, { state: { post: dummyPost } });
+    navigate(`/edit-post/${postId}`, { state: { post } });
   };
 
   const handleDelete = () => {
@@ -93,20 +61,28 @@ const PostDetailPage = () => {
     setEditingComment(comment);
   };
 
+  if (!post) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Navbar showBackButton={true} showProfileImage={true} />
       <div className={styles.contentContainer}>
         <div className={styles.titleContainer}>
-          <h2 className={styles.postTitle}>{dummyPost.title}</h2>
+          <h2 className={styles.postTitle}>{post.title}</h2>
           <div className={styles.postAuthor}>
             <img
               className={styles.postProfilePic}
-              src={dummyPost.author.profileImagePath || df_profile_img}
+              src={
+                post.author.profile_image
+                  ? `${API_BASE_URL}/images/profile/${post.author.profile_image}`
+                  : df_profile_img
+              }
               alt="Profile"
             />
-            <p className={styles.authorName}>{dummyPost.author.nickname}</p>
-            <span className={styles.postDate}>{dummyPost.date}</span>
+            <p className={styles.authorName}>{post.author.nickname}</p>
+            <span className={styles.postDate}>{post.date}</span>
             <div className={styles.postBtnContainer}>
               <button className={styles.editPostBtn} onClick={gotoEditPost}>
                 수정
@@ -126,33 +102,33 @@ const PostDetailPage = () => {
         </div>
         <div className={styles.postContent}>
           <div className={styles.imgBox}>
-            {dummyPost.imagePath && (
+            {post.post_image && (
               <img
                 className={styles.postImage}
-                src={dummyPost.imagePath}
+                src={`${API_BASE_URL}/images/posts/${post.post_image}`}
                 alt="Post"
               />
             )}
           </div>
           <p
             className={styles.postText}
-            dangerouslySetInnerHTML={{ __html: dummyPost.content }}
+            dangerouslySetInnerHTML={{ __html: post.content }}
           />
           <div className={styles.postInteraction}>
             <button className={styles.viewCountBtn}>
-              {formatCount(dummyPost.views)}
+              {formatCount(post.views)}
               <br />
               조회수
             </button>
             <button className={styles.commentCountBtn}>
-              {formatCount(dummyPost.commentsCount)}
+              {formatCount(post.commentsCount)}
               <br />
               댓글
             </button>
           </div>
         </div>
         <CommentInputForm editingComment={editingComment} />
-        {dummyComments.map((comment) => (
+        {post.comments.map((comment) => (
           <CommentCard
             key={comment.id}
             comment={comment}

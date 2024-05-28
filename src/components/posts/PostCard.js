@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./PostCard.module.css";
-import df_profile_img from "../../assets/images/profile_img.webp";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../utils/config";
 
 function formatCount(count) {
   if (count >= 100000) {
@@ -45,7 +45,7 @@ function PostCard({ post }) {
       </div>
       <div className={styles.authorInfo}>
         <img
-          src={post.author.profileImagePath || df_profile_img}
+          src={`${API_BASE_URL}/images/profile/${post.author.profile_image}`}
           alt={`${post.author.nickname}의 프로필 이미지`}
           className={styles.authorProfilePicture}
         />

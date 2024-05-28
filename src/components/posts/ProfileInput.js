@@ -41,6 +41,7 @@ function ProfileInput({ image, onImageChange }) {
         setProfileImage(reader.result);
         setHelperText(""); // 이미지 추가되면 helper text 안보임
         // 나중에 서버에 업로드 로직 여기에 추가하면 됨
+        // 아 여기가 아닌가? 흠...
         onImageChange(reader.result);
       };
       reader.readAsDataURL(file);
@@ -52,9 +53,11 @@ function ProfileInput({ image, onImageChange }) {
     }
   };
 
-  // 파일 선택 취소 시 input의 value를 초기화
   const handleInputClick = (event) => {
     event.target.value = null;
+    setProfileImage(null);
+    setHelperText("*프로필 사진을 추가해주세요.");
+    onImageChange(null);
   };
 
   return (

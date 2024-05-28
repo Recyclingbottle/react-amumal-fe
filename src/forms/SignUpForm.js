@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SignUpForm.module.css";
+import { uploadProfileImage } from "../utils/uploadApi";
+import { checkEmail, checkNickname, signup } from "../utils/userApi";
 
 function SignUpForm({ profileImage }) {
   const [email, setEmail] = useState("");
@@ -29,6 +31,16 @@ function SignUpForm({ profileImage }) {
   const validateNickname = (nickname) => {
     const nicknameRegex = /^[^\s]{1,10}$/;
     return nicknameRegex.test(nickname);
+  };
+
+  const debounce = (func, delay) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
   };
 
   useEffect(() => {
@@ -82,37 +94,81 @@ function SignUpForm({ profileImage }) {
       setNicknameHelperText("");
     }
 
-    if (!profileImage) {
-      setEmailHelperText("*프로필 사진을 추가해주세요.");
-      isValid = false;
-    } else {
-      setEmailHelperText("");
-    }
-
     setIsFormValid(isValid);
   }, [email, password, confirmPassword, nickname, profileImage]);
 
-  const handleEmailBlur = () => {
-    //중복 이메일 체크 서버에 보내는 곳
-    //지금은 그냥 하나만
-    if (email === "duplicate@example.com") {
-      setEmailHelperText("*중복된 이메일 입니다.");
-    }
-  };
+  const handleEmailChange = useCallback(
+    debounce(async (email) => {
+      if (email && validateEmail(email)) {
+        try {
+          const result = await checkEmail(email);
+          if (result.exists) {
+            setEmailHelperText("*중복된 이메일 입니다.");
+            setIsFormValid(false);
+          } else {
+            setEmailHelperText("");
+          }
+        } catch (error) {
+          setEmailHelperText("*이메일 중복 체크 중 오류가 발생했습니다.");
+          setIsFormValid(false);
+        }
+      }
+    }, 500),
+    []
+  );
 
-  const handleNicknameBlur = () => {
-    //중복 닉네임 체크 서버에 보내는 곳
-    //지금은 그냥 하나만
-    if (nickname === "duplicateNickname") {
-      setNicknameHelperText("*중복된 닉네임 입니다.");
-    }
-  };
+  const handleNicknameChange = useCallback(
+    debounce(async (nickname) => {
+      if (nickname && validateNickname(nickname)) {
+        try {
+          const result = await checkNickname(nickname);
+          if (result.exists) {
+            setNicknameHelperText("*중복된 닉네임 입니다.");
+            setIsFormValid(false);
+          } else {
+            setNicknameHelperText("");
+          }
+        } catch (error) {
+          setNicknameHelperText("*닉네임 중복 체크 중 오류가 발생했습니다.");
+          setIsFormValid(false);
+        }
+      }
+    }, 500),
+    []
+  );
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    handleEmailChange(email);
+  }, [email, handleEmailChange]);
+
+  useEffect(() => {
+    handleNicknameChange(nickname);
+  }, [nickname, handleNicknameChange]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isFormValid) {
-      //여기에서 서버에 회원가입 요청함
-      navigate("/login");
+      try {
+        // 프로필 이미지 업로드
+        const formData = new FormData();
+        formData.append("profileImage", profileImage);
+        const uploadResponse = await uploadProfileImage(formData);
+
+        // 회원가입 요청
+        const userData = {
+          email,
+          password,
+          nickname,
+          profileImage: uploadResponse.filename, // 업로드된 이미지 URL 사용
+        };
+        console.log(userData);
+        await signup(userData);
+
+        navigate("/login");
+      } catch (error) {
+        console.error("회원가입 중 오류 발생:", error);
+        // 추가적인 오류 처리 로직을 여기에 작성할 수 있습니다.
+      }
     }
   };
 
@@ -130,7 +186,6 @@ function SignUpForm({ profileImage }) {
           placeholder="이메일을 입력하세요"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          onBlur={handleEmailBlur}
           required
         />
         <p className={styles.helperText} id="email-helper">
@@ -173,7 +228,6 @@ function SignUpForm({ profileImage }) {
           {confirmPasswordHelperText}
         </p>
       </div>
-
       <div className={styles.formGroup}>
         <label className={styles.formGroupLabel} htmlFor="nickname">
           닉네임*
@@ -186,14 +240,12 @@ function SignUpForm({ profileImage }) {
           placeholder="닉네임을 입력하세요"
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
-          onBlur={handleNicknameBlur}
           required
         />
         <p className={styles.helperText} id="nickname-helper">
           {nicknameHelperText}
         </p>
       </div>
-
       <button
         className={styles.signupButton}
         id="signup-button"
