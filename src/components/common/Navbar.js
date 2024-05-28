@@ -2,8 +2,8 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
-import before_img from "../assets/images/navigate-before.png";
-import df_profile_img from "../assets/images/profile_img.webp";
+import before_img from "../../assets/images/navigate-before.png";
+import df_profile_img from "../../assets/images/profile_img.webp";
 
 function Navbar({ showBackButton, ShowProfileImage }) {
   const [menuVisible, setMenuVisible] = useState(false);

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import styles from "../style/PostDetailPage.module.css";
-import df_profile_img from "../assets/images/profile_img.webp";
-import CommentInputForm from "../forms/CommentInputForm";
-import CommentCard from "../components/CommentCard";
-import Modal from "../components/Modal";
+import Navbar from "../../components/common/Navbar";
+import styles from "./PostDetailPage.module.css";
+import df_profile_img from "../../assets/images/profile_img.webp";
+import CommentInputForm from "../../forms/CommentInputForm";
+import CommentCard from "../../components/posts/CommentCard";
+import Modal from "../../components/common/Modal";
 
 const dummyPost = {
   id: 1,

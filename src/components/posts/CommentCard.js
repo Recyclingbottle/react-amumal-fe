@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./CommentCard.module.css";
-import df_profile_img from "../assets/images/profile_img.webp";
-import Modal from "./Modal";
+import df_profile_img from "../../assets/images/profile_img.webp";
+import Modal from "../common/Modal";
 
 function CommentCard({ comment, onEdit }) {
   const [isModalOpen, setModalOpen] = useState(false);

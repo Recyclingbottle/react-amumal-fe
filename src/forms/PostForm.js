@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../style/PostCreatePage.module.css";
+import styles from "../pages/PostCreatePage/PostCreatePage.module.css";
 
 const PostForm = ({
   initialTitle = "",

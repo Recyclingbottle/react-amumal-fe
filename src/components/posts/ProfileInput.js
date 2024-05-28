@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import addIcon from "../assets/images/add-icon.png";
+import addIcon from "../../assets/images/add-icon.png";
 import styles from "./ProfileInput.module.css";
 
 function ProfileInput({ image, onImageChange }) {

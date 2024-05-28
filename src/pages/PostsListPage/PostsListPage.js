@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../style/PostsListPage.module.css";
-import Navbar from "../components/Navbar";
-import PostCard from "../components/PostCard";
+import styles from "./PostsListPage.module.css";
+import Navbar from "../../components/common/Navbar";
+import PostCard from "../../components/posts/PostCard";
 const initialPosts = [
   {
     id: 1,

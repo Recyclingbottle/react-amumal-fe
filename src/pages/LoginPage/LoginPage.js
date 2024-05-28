@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../style/LoginPage.module.css";
-import Navbar from "../components/Navbar";
-import LoginForm from "../forms/LoginForm";
+import styles from "./LoginPage.module.css";
+import Navbar from "../../components/common/Navbar";
+import LoginForm from "../../forms/LoginForm";
 function LoginPage() {
   const navigate = useNavigate();
   const gotosingup = () => {

@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
-import PostsListPage from "./pages/PostsListPage";
-import PostDetailPage from "./pages/PostDetailPage";
-import PostCreatePage from "./pages/PostCreatePage";
-import PostEditPage from "./pages/PostEditPage";
-import UserProfileEditPage from "./pages/UserProfileEditPage";
-import PasswordChangePage from "./pages/PasswordChangePage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import PostsListPage from "./pages/PostsListPage/PostsListPage";
+import PostDetailPage from "./pages/PostDetailPage/PostDetailPage";
+import PostCreatePage from "./pages/PostCreatePage/PostCreatePage";
+import PostEditPage from "./pages/PostEditPage/PostEditPage";
+import UserProfileEditPage from "./pages/UserProfileEditPage/UserProfileEditPage";
+import PasswordChangePage from "./pages/PasswordChangePage/PasswordChangePage";
 
 function App() {
   return (

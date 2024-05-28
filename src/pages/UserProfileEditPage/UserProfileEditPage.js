@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import ProfileInput from "../components/ProfileInput";
-import styles from "../style/UserProfileEditPage.module.css";
-import Modal from "../components/Modal";
-import df_profile_img from "../assets/images/profile_img.webp";
+import Navbar from "../../components/common/Navbar";
+import ProfileInput from "../../components/posts/ProfileInput";
+import styles from "./UserProfileEditPage.module.css";
+import Modal from "../../components/common/Modal";
+import df_profile_img from "../../assets/images/profile_img.webp";
 
 function UserProfileEditPage() {
   const [nickname, setNickname] = useState("jun.park (박원준)");

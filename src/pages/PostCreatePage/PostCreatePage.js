@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import PostForm from "../forms/PostForm";
-import styles from "../style/PostCreatePage.module.css";
+import Navbar from "../../components/common/Navbar";
+import PostForm from "../../forms/PostForm";
+import styles from "./PostCreatePage.module.css";
 
 const PostCreatePage = () => {
   const navigate = useNavigate();

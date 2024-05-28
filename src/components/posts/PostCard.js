@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./PostCard.module.css";
-import df_profile_img from "../assets/images/profile_img.webp";
+import df_profile_img from "../../assets/images/profile_img.webp";
 import { useNavigate } from "react-router-dom";
 
 function formatCount(count) {

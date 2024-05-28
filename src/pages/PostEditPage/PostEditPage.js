@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 //import { useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import PostForm from "../forms/PostForm";
-import styles from "../style/PostCreatePage.module.css";
+import Navbar from "../../components/common/Navbar";
+import PostForm from "../../forms/PostForm";
+import styles from "./PostEditPage.module.css";
 
 function PostEditPage() {
   //const { postId } = useParams();

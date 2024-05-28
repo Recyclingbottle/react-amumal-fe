@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import styles from "../style/SignUpPage.module.css";
-import SignUpForm from "../forms/SignUpForm";
-import ProfileInput from "../components/ProfileInput";
+import Navbar from "../../components/common/Navbar";
+import styles from "./SignUpPage.module.css";
+import SignUpForm from "../../forms/SignUpForm";
+import ProfileInput from "../../components/posts/ProfileInput";
 
 function SignUpPage() {
   const [profileImage, setProfileImage] = useState(null);

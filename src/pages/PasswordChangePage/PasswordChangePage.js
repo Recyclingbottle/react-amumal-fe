@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 //import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import styles from "../style/PasswordChangePage.module.css";
+import Navbar from "../../components/common/Navbar";
+import styles from "./PasswordChangePage.module.css";
 
 function PasswordChangePage() {
   //const navigate = useNavigate();
